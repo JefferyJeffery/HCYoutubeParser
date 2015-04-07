@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   s.author       = "hellozimi"
   s.summary      = "Retrieves the iOS compatible video URL from YouTube."
   s.description  = "HCYoutubeParser is a class which lets you get the iOS compatible video url from YouTube so you don't need to use a UIWebView or open the YouTube Application."
-  s.homepage     = "https://github.com/hellozimi/HCYoutubeParser"
+  s.homepage     = "https://github.com/JefferyJeffery/HCYoutubeParser"
 
-  s.source       = { :git => "https://github.com/hellozimi/HCYoutubeParser.git", :tag => "0.0.2" }
+  s.source       = { :git => "https://github.com/JefferyJeffery/HCYoutubeParser.git" }
 
   s.source_files = 'YoutubeParser/Classes'
   s.public_header_files = 'YoutubeParser/Classes/*.h'
