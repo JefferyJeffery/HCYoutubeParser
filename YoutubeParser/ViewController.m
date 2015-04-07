@@ -157,16 +157,26 @@ typedef void(^DrawRectBlock)(CGRect rect);
                 NSDictionary *qualities = videoDictionary;
                 
                 NSString *URLString = nil;
-                if ([qualities objectForKey:@"small"] != nil) {
-                    URLString = [qualities objectForKey:@"small"];
-                }
-                else if ([qualities objectForKey:@"live"] != nil) {
-                    URLString = [qualities objectForKey:@"live"];
-                }
-                else {
-                    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Couldn't find youtube video" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
+                
+                if ([[qualities objectForKey:kYoutubeInfoStatus] isEqualToString:vYoutubeStatusOK]) {
+                    if ([qualities objectForKey:kYoutubeVideoHD720] != nil) {
+                        URLString = [qualities objectForKey:kYoutubeVideoHD720];
+                    }
+                    else if ([qualities objectForKey:kYoutubeVideoLive] != nil) {
+                        URLString = [qualities objectForKey:kYoutubeVideoLive];
+                    }
+                    else {
+                        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Couldn't find youtube video" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
+                        return;
+                    }
+                } else {
+                    NSString *YoutubeErrorReason = [qualities objectForKey:kYoutubeErrorReason];
+                    
+                    [[[UIAlertView alloc] initWithTitle:@"Error" message:YoutubeErrorReason delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
                     return;
                 }
+                
+
                 _urlToLoad = [NSURL URLWithString:URLString];
                 
                 [_playButton setImage:[UIImage imageNamed:@"play_button"] forState:UIControlStateNormal];
